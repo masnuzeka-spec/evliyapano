@@ -1,277 +1,76 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Siirt Evliya Çelebi TMTAL | Simetri V23 (Tam Ekran)</title>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
-    <style>
-        /* AMIRI FONTU (İhtiyaç olursa diye kalsın) */
-        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap');
-
-        :root {
-            --main-bg: #0f172a; 
-            --text-color: #f8fafc;
-            --accent-color: #f59e0b;
-        }
-
-        body {
-            margin: 0; padding: 0; font-family: 'Outfit', sans-serif;
-            height: 100vh; width: 100vw; overflow: hidden;
-            background-color: var(--main-bg);
-        }
-
-        /* YÜKLEME EKRANI */
-        #loader { 
-            position: absolute; top:0; left:0; width:100%; height:100%; 
-            background: #0f172a; color: white; z-index: 200; 
-            display: flex; justify-content: center; align-items: center; 
-            font-size: 2.5rem; flex-direction: column; font-weight: bold; letter-spacing: 2px;
-        }
-
-        /* ANA SAHNE (ARTIK %100) */
-        main { 
-            width: 100%; height: 100%; 
-            position: relative; 
-            background: #000; 
-        }
-
-        .slide {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            opacity: 0; visibility: hidden; transition: opacity 0.8s, visibility 0.8s;
-            background: var(--main-bg); 
-            display: flex; justify-content: center; align-items: center; 
-            padding: 0; /* Tam ekran olduğu için padding sıfırlandı, içerik ayarlar */
-            box-sizing: border-box;
-        }
-        .slide.active { opacity: 1; visibility: visible; z-index: 10; }
-
-        /* Haber Slaytı */
-        .news-slide { 
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); 
-            color: #fff; flex-direction: column; text-align: center; 
-            padding: 5rem; /* Geniş ekran olduğu için padding arttı */
-            border: none;
-        }
-        .news-badge { 
-            background: #ef4444; color: white; padding: 10px 40px; 
-            font-weight: bold; letter-spacing: 4px; border-radius: 60px; 
-            margin-bottom: 3rem; font-size: 1.5rem; text-transform: uppercase; 
-            box-shadow: 0 0 30px rgba(239, 68, 68, 0.6); animation: pulse 2s infinite; 
-        }
-        .news-title { font-size: 4.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 2rem; color: #fff; }
-        .news-content { font-size: 2.2rem; font-weight: 400; line-height: 1.5; color: #cbd5e1; max-width: 85%; }
-        
-        /* Medya */
-        .media-content { width: 100%; height: 100%; object-fit: contain; background: #000; }
-        iframe.youtube-embed { width: 100%; height: 100%; border: none; }
-        
-        /* Sınav Stilleri (Genişletildi) */
-        .exam-container { width: 100%; height: 100%; display: flex; flex-direction: column; padding: 20px; box-sizing: border-box; }
-        .class-header { background: var(--theme-color); color: #fff; padding: 1.5rem; text-align: center; font-size: 3rem; font-weight: 800; border-radius: 16px; margin-bottom: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-        .grid-wrapper { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; height: 100%; align-content: start; }
-        .day-card { background: #ffffff; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border: 1px solid rgba(0,0,0,0.1); display: flex; flex-direction: column; overflow: hidden; }
-        .day-header { background: #f1f5f9; padding: 15px; text-align: center; border-bottom: 5px solid var(--theme-color); }
-        .date-text { font-size: 2rem; font-weight: 900; color: var(--theme-color); }
-        .day-name { font-size: 1.4rem; color: #334155; opacity: 0.8; font-weight: 700; }
-        .exam-list { padding: 15px; flex: 1; display: flex; flex-direction: column; gap: 12px; justify-content: flex-start; }
-        .exam-item { display: flex; align-items: stretch; background: #f8fafc; border-radius: 8px; overflow: hidden; min-height: 65px; border: 1px solid #e2e8f0; }
-        .exam-hour { background: var(--theme-color); color: #fff; width: 80px; display: flex; flex-direction: column; justify-content: center; align-items: center; font-size: 1.8rem; font-weight: 800; line-height: 1; }
-        .exam-hour span { font-size: 0.8rem; font-weight: normal; }
-        .exam-lesson { flex: 1; display: flex; align-items: center; padding: 0 15px; font-weight: 700; color: #1e293b; font-size: 1.4rem; line-height: 1.2; }
-
-        .progress-bar { position: absolute; bottom: 0; left: 0; height: 8px; background: var(--accent-color); width: 0%; z-index: 50; }
-        
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <meta name="theme-color" content="#020617">
+  <title>Siirt Evliya Çelebi TMTAL - Orta Alan Pano</title>
+  <style>
+    :root{--bg:#020617;--fg:#f8fafc;--accent:#f59e0b;--theme:#2563eb}
+    *{box-sizing:border-box} html,body{width:100%;height:100%;margin:0;overflow:hidden;background:#000;font-family:Arial,"Segoe UI",sans-serif;color:var(--fg)}
+    #stage{position:relative;width:100%;height:100%;overflow:hidden;background:#000}
+    .slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transform:scale(.995);transition:opacity .55s ease,transform .55s ease,visibility .55s;background:var(--bg)}
+    .slide.active{opacity:1;visibility:visible;transform:scale(1)}
+    #loader{position:fixed;inset:0;z-index:99;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:radial-gradient(circle at 50% 30%,#1e3a8a55,transparent 40%),#020617;text-align:center}
+    .spinner{width:42px;height:42px;border:5px solid #ffffff22;border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+    #loader strong{font-size:clamp(20px,3.5vw,38px)} #loader span{color:#94a3b8;font-size:clamp(12px,1.5vw,18px)}
+    .news{--news:#2563eb;padding:clamp(18px,3vw,35px) clamp(24px,4vw,48px);background:radial-gradient(circle at 12% 35%,color-mix(in srgb,var(--news) 32%,transparent),transparent 34%),linear-gradient(135deg,#111827,#020617)}
+    .news-grid{width:100%;display:grid;grid-template-columns:clamp(90px,14vw,145px) minmax(0,1fr);gap:clamp(20px,3vw,38px);align-items:center}
+    .news-icon{width:clamp(90px,14vw,145px);aspect-ratio:1;display:grid;place-items:center;border-radius:28%;background:var(--news);border:2px solid #ffffff44;box-shadow:0 20px 55px color-mix(in srgb,var(--news) 38%,transparent);font-size:clamp(44px,7vw,78px);font-weight:900}
+    .badge{display:inline-block;margin-bottom:10px;padding:6px 18px;border-radius:999px;background:var(--news);font-size:clamp(11px,1.3vw,16px);font-weight:900;letter-spacing:2px}
+    .news h1{margin:0 0 12px;font-size:clamp(28px,4.3vw,54px);line-height:1.04;overflow-wrap:anywhere}.news p{margin:0;color:#dbeafe;font-size:clamp(17px,2.25vw,29px);line-height:1.34;overflow-wrap:anywhere;white-space:pre-line}
+    .exam{padding:clamp(8px,1.4vw,15px);background:linear-gradient(135deg,#0f172a,#111827)}
+    .exam-box{width:100%;height:100%;display:flex;flex-direction:column;min-height:0}.exam-title{flex:none;margin-bottom:8px;padding:9px 12px;border-radius:11px;background:var(--theme);font-size:clamp(20px,2.7vw,34px);font-weight:900;text-align:center;box-shadow:0 8px 22px #0005}
+    .exam-grid{flex:1;min-height:0;display:grid;gap:8px}.day{min-width:0;min-height:0;display:flex;flex-direction:column;overflow:hidden;border-radius:10px;background:#fff;color:#172033}.day-head{flex:none;padding:7px;text-align:center;background:#f1f5f9;border-bottom:4px solid var(--theme)}.date{color:var(--theme);font-size:clamp(15px,1.8vw,23px);font-weight:900}.dayname{margin-top:2px;color:#475569;font-size:clamp(11px,1.15vw,15px);font-weight:700}
+    .lessons{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:5px;padding:7px}.lesson{flex:1;min-height:34px;max-height:62px;display:flex;overflow:hidden;border:1px solid #e2e8f0;border-radius:7px;background:#f8fafc}.hour{width:55px;flex:0 0 55px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--theme);color:#fff;font-size:clamp(16px,1.7vw,22px);font-weight:900;line-height:1}.hour small{margin-top:2px;font-size:8px}.subject{flex:1;min-width:0;display:flex;align-items:center;padding:5px 8px;font-size:clamp(11px,1.25vw,16px);line-height:1.08;font-weight:800;overflow-wrap:anywhere}
+    .media{background:#000}.media img,.media video,.media iframe{display:block;width:100%;height:100%;border:0;background:#000;object-fit:contain}
+    .custom{display:block;overflow:hidden;background:#000}.custom-inner{width:100%;height:100%;overflow:hidden}
+    .message{width:min(680px,90%);padding:30px;border:1px solid #ffffff22;border-radius:18px;background:#0f172ae8;text-align:center}.message strong{display:block;font-size:clamp(22px,3vw,36px)}.message span{display:block;margin-top:10px;color:#94a3b8;font-size:clamp(14px,1.7vw,20px)}
+    #progressTrack{position:fixed;left:0;bottom:0;z-index:90;width:100%;height:4px;background:#ffffff1c}#progress{height:100%;width:0;background:linear-gradient(90deg,#f59e0b,#fde68a)}
+    #dot{position:fixed;right:7px;bottom:8px;z-index:91;width:7px;height:7px;border-radius:50%;background:#f59e0b;opacity:.65}#dot.online{background:#22c55e}#dot.offline{background:#ef4444}
+    @media(max-width:700px),(max-height:430px){.news{padding:15px 22px}.news-grid{grid-template-columns:80px minmax(0,1fr);gap:18px}.news-icon{width:80px;font-size:40px}.badge{margin-bottom:7px;padding:5px 13px}.news h1{margin-bottom:8px}.exam-title{padding:7px 10px;margin-bottom:6px}.exam-grid{gap:6px}.day-head{padding:5px}.lessons{padding:5px;gap:4px}.hour{width:48px;flex-basis:48px}}
+  </style>
 </head>
 <body>
-
-    <div id="loader">SİSTEM YÜKLENİYOR...<br><span style="font-size:1rem; margin-top:10px; opacity:0.7;">Siirt Evliya Çelebi TMTAL Panosu</span></div>
-
-    <main id="slider-stage">
-        <div class="progress-bar" id="progress"></div>
-    </main>
-
-    <script>
-        // ===============================================================
-        // CSV LİNKLERİ (SÖZLER LİNKİNİ KALDIRDIK)
-        // ===============================================================
-        const CSV_MEDYA =     "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZVHePaoezGmveXoNkXIzZnrWOPyj7CWDQMIpZFkiySklVPPWh1WpGO9QGYPQ86868taRJFfADH8Ow/pub?gid=167087393&single=true&output=csv";
-        const CSV_SINAVLAR =  "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZVHePaoezGmveXoNkXIzZnrWOPyj7CWDQMIpZFkiySklVPPWh1WpGO9QGYPQ86868taRJFfADH8Ow/pub?gid=501842148&single=true&output=csv";
-        const CSV_AYARLAR =   "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZVHePaoezGmveXoNkXIzZnrWOPyj7CWDQMIpZFkiySklVPPWh1WpGO9QGYPQ86868taRJFfADH8Ow/pub?gid=528247398&single=true&output=csv";
-        // ===============================================================
-
-        let allSlides = [];
-        let currentSlideIdx = 0;
-        let slideTimer = null;
-        let isFirstLoad = true;
-
-        async function updateSystem() {
-            try {
-                // SÖZLER verisini artık çekmiyoruz, sadece medya, sınav ve ayar
-                let ayarPromise = (CSV_AYARLAR && CSV_AYARLAR.startsWith("http")) ? fetchData(CSV_AYARLAR) : Promise.resolve([]);
-                const [medyaData, sinavData, ayarData] = await Promise.all([
-                    fetchData(CSV_MEDYA), fetchData(CSV_SINAVLAR), ayarPromise
-                ]);
-
-                // Tema Ayarı (Arka plan rengi değişimi için basit mantık)
-                /* (İsteğe bağlı tema kodu burada tutulabilir ama tam ekranda içerik baskın olduğu için sadeleştirdik) */
-
-                let newSlides = [];
-
-                // --- SINAVLAR (AKILLI SİSTEM & SORUMLULUK MODU) ---
-                let examsMap = {};
-                sinavData.forEach(row => {
-                    if (row.Sinif) {
-                        let tur = row.Tur ? row.Tur.trim() : 'Normal'; 
-                        let key = row.Sinif.trim() + '_' + tur;
-                        if (!examsMap[key]) { examsMap[key] = { sinif: row.Sinif.trim(), tur: tur, liste: [] }; }
-                        examsMap[key].liste.push(row);
-                    }
-                });
-
-                Object.values(examsMap).forEach(grup => {
-                    let slideColor, titleSuffix;
-                    if (grup.tur.toLowerCase() === 'sorumluluk') {
-                        slideColor = '#dc2626'; // KIRMIZI
-                        titleSuffix = 'SORUMLULUK SINAVI';
-                    } else {
-                        if (grup.sinif == '9') slideColor = '#0284c7';
-                        else if (grup.sinif == '10') slideColor = '#ea580c';
-                        else if (grup.sinif == '11') slideColor = '#059669';
-                        else slideColor = '#7c3aed';
-                        titleSuffix = 'SINAV PROGRAMI';
-                    }
-                    newSlides.push({ type: 'exam', grade: grup.sinif, data: grup.liste, color: slideColor, titleSuffix: titleSuffix });
-                });
-
-                // --- MEDYA & HTML MODU ---
-                medyaData.forEach(m => {
-                    if(m.Tip) {
-                        let type = m.Tip.toLowerCase().trim();
-                        if(type === 'haber' || type === 'yazi') {
-                            newSlides.push({ type: 'news', title: m.Link, text: m.Aciklama, duration: (parseInt(m.Sure) || 15) * 1000 });
-                        } 
-                        // ** HTML MODU **
-                        else if (type === 'html') {
-                             newSlides.push({ type: 'custom_html', content: m.Aciklama, duration: (parseInt(m.Sure) || 20) * 1000 });
-                        }
-                        else if(m.Link) {
-                            let url = m.Link;
-                            let mediaType = type;
-                            if (mediaType === 'youtube' || url.includes('youtube.com') || url.includes('youtu.be')) {
-                                mediaType = 'youtube';
-                                const videoId = getYouTubeID(url);
-                                if(videoId) url = videoId;
-                            }
-                            newSlides.push({ type: 'media', url: url, mediaType: mediaType, duration: (parseInt(m.Sure) || 15) * 1000 });
-                        }
-                    }
-                });
-
-                allSlides = newSlides;
-
-                if(isFirstLoad) {
-                    document.getElementById('loader').style.display = 'none';
-                    if(allSlides.length > 0) renderSlide(0);
-                    isFirstLoad = false;
-                }
-            } catch (err) { console.error(err); document.getElementById('loader').style.display = 'none'; }
-        }
-
-        setTimeout(() => { if(document.getElementById('loader').style.display !== 'none') document.getElementById('loader').style.display = 'none'; }, 8000);
-
-        function shootConfetti() {
-            var duration = 3000; var end = Date.now() + duration;
-            (function frame() {
-                confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#ff0000', '#00ff00', '#0000ff', '#ffff00'] });
-                confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#ff0000', '#00ff00', '#0000ff', '#ffff00'] });
-                if (Date.now() < end) { requestAnimationFrame(frame); }
-            }());
-        }
-
-        function renderSlide(index) {
-            const stage = document.getElementById('slider-stage');
-            const progress = document.getElementById('progress');
-            const slideData = allSlides[index];
-            if(!slideData) return;
-
-            Array.from(stage.children).forEach(child => { if(child.id !== 'progress') stage.removeChild(child); });
-            const slideEl = document.createElement('div');
-            slideEl.className = 'slide';
-
-            let duration = slideData.duration || 10000;
-
-            if(slideData.type === 'exam') {
-                slideEl.style.setProperty('--theme-color', slideData.color);
-                slideEl.innerHTML = getExamHTML(slideData);
-            } 
-            else if (slideData.type === 'news') {
-                slideEl.classList.add('news-slide');
-                slideEl.innerHTML = `<div class="news-badge">DUYURU</div><div class="news-title">${slideData.title}</div><div class="news-content">${slideData.text || ''}</div>`;
-                let fullText = (slideData.title + " " + (slideData.text||"")).toLowerCase();
-                if(fullText.includes("doğum günü") || fullText.includes("dogum gunu") || fullText.includes("doğdun") || fullText.includes("kutlu olsun")) shootConfetti();
-            }
-            // ** HTML RENDER MODU **
-            else if (slideData.type === 'custom_html') {
-                slideEl.style.background = '#000'; 
-                slideEl.style.color = '#fff';
-                slideEl.style.display = 'flex';
-                slideEl.style.justifyContent = 'center';
-                slideEl.style.alignItems = 'center';
-                slideEl.style.overflow = 'hidden';
-                slideEl.innerHTML = slideData.content;
-            }
-            else if (slideData.type === 'media') {
-                slideEl.style.background = '#000';
-                if(slideData.mediaType === 'youtube') slideEl.innerHTML = `<iframe class="youtube-embed" src="https://www.youtube.com/embed/${slideData.url}?autoplay=1&mute=1&controls=0&loop=1&playlist=${slideData.url}" allow="autoplay; encrypted-media"></iframe>`;
-                else if(slideData.mediaType.includes('video')) slideEl.innerHTML = `<video src="${slideData.url}" class="media-content" autoplay muted loop></video>`;
-                else slideEl.innerHTML = `<img src="${slideData.url}" class="media-content">`;
-            }
-
-            stage.appendChild(slideEl);
-            requestAnimationFrame(() => slideEl.classList.add('active'));
-
-            progress.style.transition = 'none'; progress.style.width = '0%'; void progress.offsetWidth;
-            setTimeout(() => { progress.style.transition = `width ${duration}ms linear`; progress.style.width = '100%'; }, 50);
-
-            clearTimeout(slideTimer);
-            slideTimer = setTimeout(() => { currentSlideIdx = (currentSlideIdx + 1) % allSlides.length; renderSlide(currentSlideIdx); }, duration);
-        }
-
-        function fetchData(url) { 
-    // Linkin sonuna rastgele sayı ekliyoruz ki tarayıcı "Aaa bu yeni dosya" sansın
-    const antiCacheUrl = url + "&cache_buster=" + Date.now();
-    
-    return new Promise((resolve) => { 
-        Papa.parse(antiCacheUrl, { 
-            download: true, 
-            header: true, 
-            skipEmptyLines: true, 
-            complete: (results) => resolve(results.data), 
-            error: () => resolve([]) 
-        }); 
-    }); 
-}
-
-        function getYouTubeID(url) { const match = url.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/); return (match && match[2].length === 11) ? match[2] : null; }
-        
-        function getExamHTML(slide) {
-            let cards = slide.data.map(exam => {
-                let rows = "";
-                if(exam.Ders3) rows += `<div class="exam-item"><div class="exam-hour">3.<span>DERS</span></div><div class="exam-lesson">${exam.Ders3}</div></div>`;
-                if(exam.Ders5) rows += `<div class="exam-item"><div class="exam-hour">5.<span>DERS</span></div><div class="exam-lesson">${exam.Ders5}</div></div>`;
-                if(exam.Ders9) rows += `<div class="exam-item"><div class="exam-hour">9.<span>DERS</span></div><div class="exam-lesson">${exam.Ders9}</div></div>`;
-                return `<div class="day-card"><div class="day-header"><div class="date-text">${exam.Tarih||''}</div><div class="day-name">${exam.Gun||''}</div></div><div class="exam-list">${rows}</div></div>`;
-            }).join('');
-            return `<div class="exam-container"><div class="class-header">${slide.grade}. SINIF ${slide.titleSuffix}</div><div class="grid-wrapper">${cards}</div></div>`;
-        }
-
-        updateSystem(); setInterval(updateSystem, 60000);
-    </script>
+  <div id="loader"><strong>SİSTEM YÜKLENİYOR</strong><div class="spinner"></div><span>Siirt Evliya Çelebi TMTAL Dijital Panosu</span></div>
+  <main id="stage"></main>
+  <div id="progressTrack"><div id="progress"></div></div>
+  <div id="dot" title="Bağlantı durumu"></div>
+<script>
+'use strict';
+/* GOOGLE SHEETS YAYIN LİNKLERİ */
+const CSV_MEDYA="https://docs.google.com/spreadsheets/d/e/2PACX-1vRZVHePaoezGmveXoNkXIzZnrWOPyj7CWDQMIpZFkiySklVPPWh1WpGO9QGYPQ86868taRJFfADH8Ow/pub?gid=167087393&single=true&output=csv";
+const CSV_SINAVLAR="https://docs.google.com/spreadsheets/d/e/2PACX-1vRZVHePaoezGmveXoNkXIzZnrWOPyj7CWDQMIpZFkiySklVPPWh1WpGO9QGYPQ86868taRJFfADH8Ow/pub?gid=501842148&single=true&output=csv";
+const CSV_AYARLAR="https://docs.google.com/spreadsheets/d/e/2PACX-1vRZVHePaoezGmveXoNkXIzZnrWOPyj7CWDQMIpZFkiySklVPPWh1WpGO9QGYPQ86868taRJFfADH8Ow/pub?gid=528247398&single=true&output=csv";
+const UPDATE_INTERVAL=30000, FULL_RELOAD_INTERVAL=4*60*60*1000, FETCH_TIMEOUT=15000, WATCHDOG_TIMEOUT=8*60*1000;
+const STORAGE_KEY='ec_pano_middle_v5';
+let slides=[],pending=[],idx=0,slideTimer=null,updating=false,lastChange=Date.now(),first=true;
+const $=id=>document.getElementById(id);
+function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
+function norm(v){return String(v??'').trim().toLocaleLowerCase('tr-TR')}
+function duration(v,d=15){const n=parseInt(v,10);return (Number.isFinite(n)?Math.min(Math.max(n,5),300):d)*1000}
+function parseDate(v){if(!v)return null;const s=String(v).trim();let d=new Date(s);if(!isNaN(d))return d;const m=s.match(/^(\d{1,2})[.\/-](\d{1,2})[.\/-](\d{4})(?:\s+(\d{1,2}):(\d{2}))?$/);return m?new Date(+m[3],+m[2]-1,+m[1],+(m[4]||0),+(m[5]||0)):null}
+function active(r){if(['false','hayır','hayir','0','pasif','no'].includes(norm(r.Aktif||'true')))return false;const now=Date.now(),a=parseDate(r.Baslangic||r.Başlangıç),b=parseDate(r.Bitis||r.Bitiş);return !(a&&now<a.getTime())&&!(b&&now>b.getTime())}
+function ordered(a){return [...a].sort((x,y)=>(parseInt(x.Sira,10)||9999)-(parseInt(y.Sira,10)||9999))}
+function csvParse(text){const rows=[];let row=[],cell='',q=false;for(let i=0;i<text.length;i++){const c=text[i],n=text[i+1];if(c==='"'){if(q&&n==='"'){cell+='"';i++}else q=!q}else if(c===','&&!q){row.push(cell);cell=''}else if((c==='\n'||c==='\r')&&!q){if(c==='\r'&&n==='\n')i++;row.push(cell);cell='';if(row.some(x=>x!==''))rows.push(row);row=[]}else cell+=c}if(cell||row.length){row.push(cell);rows.push(row)}if(!rows.length)return[];const head=rows[0].map((h,i)=>(i===0?h.replace(/^\uFEFF/,''):h).trim());return rows.slice(1).map(r=>Object.fromEntries(head.map((h,i)=>[h,(r[i]??'').trim()]))) }
+async function fetchCSV(url){const ctrl=new AbortController(),t=setTimeout(()=>ctrl.abort(),FETCH_TIMEOUT);try{const sep=url.includes('?')?'&':'?';const res=await fetch(url+sep+'cb='+Date.now(),{cache:'no-store',signal:ctrl.signal});if(!res.ok)throw Error('HTTP '+res.status);return csvParse(await res.text())}finally{clearTimeout(t)}}
+function save(s){try{localStorage.setItem(STORAGE_KEY,JSON.stringify({slides:s,time:Date.now()}))}catch(e){}}
+function load(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}').slides||[]}catch(e){return[]}}
+function yt(url){const m=String(url).match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([^#&?]{11})/);return m?m[1]:null}
+function theme(c){c=norm(c);if(c==='acil')return['ACİL','#dc2626','!'];if(['başarı','basari'].includes(c))return['BAŞARI','#16a34a','★'];if(c==='etkinlik')return['ETKİNLİK','#7c3aed','●'];if(['sınav','sinav'].includes(c))return['SINAV','#ea580c','✓'];if(['kutlama','doğum günü','dogum gunu'].includes(c))return['KUTLAMA','#db2777','★'];return['DUYURU','#2563eb','i']}
+function build(media,exams){const out=[],map={};exams.filter(active).forEach(r=>{const g=String(r.Sinif||r.Sınıf||'').trim();if(!g)return;const t=String(r.Tur||r.Tür||'Normal').trim(),k=g+'_'+t;(map[k]??={grade:g,tur:t,rows:[]}).rows.push(r)});Object.values(map).sort((a,b)=>(+a.grade||99)-(+b.grade||99)).forEach(g=>{const sor=norm(g.tur)==='sorumluluk';out.push({type:'exam',grade:g.grade,rows:ordered(g.rows),color:sor?'#dc2626':g.grade==='9'?'#0284c7':g.grade==='10'?'#ea580c':g.grade==='11'?'#059669':'#7c3aed',title:sor?'SORUMLULUK SINAVI':'SINAV PROGRAMI',duration:duration(g.rows[0]?.Sure,20)})});ordered(media.filter(active)).forEach(r=>{const t=norm(r.Tip);if(!t)return;if(['haber','yazi','yazı','duyuru'].includes(t)){out.push({type:'news',title:r.Baslik||r.Başlık||r.Link||'',text:r.Aciklama||r.Açıklama||'',category:r.Kategori||'Duyuru',duration:duration(r.Sure,15)});return}if(t==='html'){out.push({type:'custom',html:r.Aciklama||r.Açıklama||'',duration:duration(r.Sure,20)});return}if(!r.Link)return;let url=String(r.Link).trim(),kind=t;if(kind==='youtube'||url.includes('youtube.com')||url.includes('youtu.be')){url=yt(url);if(!url)return;kind='youtube'}out.push({type:'media',url,kind,duration:duration(r.Sure,15)})});return out}
+async function update(){if(updating)return;updating=true;$('dot').className='';try{const [m,e]=await Promise.all([fetchCSV(CSV_MEDYA),fetchCSV(CSV_SINAVLAR)]);const n=build(m,e);if(!n.length)throw Error('Boş veri');save(n);if(first||!slides.length){slides=n;pending=[];idx=0;hideLoader();render(0);first=false}else pending=n;$('dot').className='online'}catch(e){console.error(e);$('dot').className='offline';if(!slides.length){const old=load();if(old.length){slides=old;idx=0;hideLoader();render(0);first=false}else{hideLoader();message('Veriler alınamadı','İnternet bağlantısını ve Google Sheets yayınını kontrol edin.')}}}finally{updating=false}}
+function cols(n){return n<=1?1:n===2?2:n<=6?3:4}
+function lesson(no,name){return name?`<div class="lesson"><div class="hour">${no}.<small>DERS</small></div><div class="subject">${esc(name)}</div></div>`:''}
+function examHTML(s){const cards=s.rows.map(r=>{const ls=lesson(3,r.Ders3)+lesson(5,r.Ders5)+lesson(9,r.Ders9)||'<div class="subject">Ders bilgisi girilmemiş.</div>';return `<div class="day"><div class="day-head"><div class="date">${esc(r.Tarih||'')}</div><div class="dayname">${esc(r.Gun||r.Gün||'')}</div></div><div class="lessons">${ls}</div></div>`}).join('');return `<div class="exam-box"><div class="exam-title">${esc(s.grade)}. SINIF ${esc(s.title)}</div><div class="exam-grid" style="grid-template-columns:repeat(${cols(s.rows.length)},minmax(0,1fr))">${cards}</div></div>`}
+function mediaError(el){el.innerHTML='<div class="message"><strong>İçerik görüntülenemedi</strong><span>Pano otomatik olarak sonraki slayda geçecektir.</span></div>'}
+function render(i){if(!slides.length)return;idx=(i+slides.length)%slides.length;const s=slides[idx],el=document.createElement('section');el.className='slide';if(s.type==='news'){const [label,color,icon]=theme(s.category);el.classList.add('news');el.style.setProperty('--news',color);el.innerHTML=`<div class="news-grid"><div class="news-icon">${esc(icon)}</div><div><div class="badge">${esc(label)}</div><h1>${esc(s.title)}</h1><p>${esc(s.text)}</p></div></div>`}else if(s.type==='exam'){el.classList.add('exam');el.style.setProperty('--theme',s.color);el.innerHTML=examHTML(s)}else if(s.type==='custom'){el.classList.add('custom');el.innerHTML=`<div class="custom-inner">${s.html||''}</div>`}else{el.classList.add('media');if(s.kind==='youtube'){const id=encodeURIComponent(s.url);el.innerHTML=`<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&mute=1&controls=0&rel=0&playsinline=1&loop=1&playlist=${id}" allow="autoplay; encrypted-media" title="Pano videosu"></iframe>`}else if(s.kind.includes('video')){const v=document.createElement('video');v.src=s.url;v.autoplay=true;v.muted=true;v.loop=true;v.playsInline=true;v.preload='auto';v.onerror=()=>mediaError(el);el.appendChild(v);setTimeout(()=>v.play().catch(()=>{}),500)}else{const im=document.createElement('img');im.src=s.url;im.alt='Pano görseli';im.referrerPolicy='no-referrer';im.onerror=()=>mediaError(el);el.appendChild(im)}}$('stage').replaceChildren(el);requestAnimationFrame(()=>el.classList.add('active'));lastChange=Date.now();const p=$('progress');p.style.transition='none';p.style.width='0';void p.offsetWidth;setTimeout(()=>{p.style.transition=`width ${s.duration||10000}ms linear`;p.style.width='100%'},50);clearTimeout(slideTimer);slideTimer=setTimeout(next,s.duration||10000)}
+function next(){if(!slides.length)return;if(idx+1>=slides.length){if(pending.length){slides=pending;pending=[];save(slides)}idx=0}else idx++;render(idx)}
+function message(a,b){const el=document.createElement('section');el.className='slide active';el.innerHTML=`<div class="message"><strong>${esc(a)}</strong><span>${esc(b)}</span></div>`;$('stage').replaceChildren(el)}
+function hideLoader(){$('loader').style.display='none'}
+window.addEventListener('online',()=>update());window.addEventListener('offline',()=>$('dot').className='offline');document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')update()});
+async function start(){const old=load();if(old.length){slides=old;hideLoader();render(0);first=false}await update();setInterval(update,UPDATE_INTERVAL);setTimeout(()=>location.reload(),FULL_RELOAD_INTERVAL);setInterval(()=>{if(document.visibilityState==='visible'&&Date.now()-lastChange>WATCHDOG_TIMEOUT)location.reload()},60000)}
+window.addEventListener('load',start);setTimeout(()=>{if($('loader').style.display!=='none'){hideLoader();if(!slides.length)message('Sistem başlatılamadı','Bağlantıyı kontrol edin.')}},20000);
+</script>
 </body>
 </html>
